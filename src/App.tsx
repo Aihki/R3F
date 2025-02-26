@@ -6,7 +6,7 @@ import { Model } from './components/Model';
 import { Model2 } from './components/Model2';
 import { FlyControls, PointerLockControls, Sky, Stats } from '@react-three/drei';
 import Crosshair from './components/Crosshair';
-import Wall from './components/Wall';
+
 
 
 function App() {
@@ -55,17 +55,16 @@ function App() {
           castShadow 
           receiveShadow 
         />
-        <Wall 
+      {/*   <Wall 
           position={[2.15, 1.5, 0]} 
           rotation={[0, Math.PI / 2, 0]}
           size={[5, 3, 0.3]}
-        />
+        /> */}
         <Model2
-          position={[2, 1.5, 0]}
+          position={[1.57, 0, 0]}
           scale={[0.5, 0.5, 0.5]} 
           castShadow
           receiveShadow
-          rotation={[0, -Math.PI / 2, 0]}
         />
         {grounds}
       </Canvas>
