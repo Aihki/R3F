@@ -1,8 +1,10 @@
 import { useGLTF, useTexture } from '@react-three/drei'
 import { GroupProps, useFrame } from '@react-three/fiber'
 import { GLTF } from 'three-stdlib'
-import { Mesh, MeshStandardMaterial, Color, RepeatWrapping } from 'three'
+import { Mesh, MeshStandardMaterial, Color, RepeatWrapping,  FrontSide, LinearMipmapLinearFilter, LinearFilter } from 'three'
 import { useRef, useState } from 'react'
+
+
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -37,9 +39,9 @@ export function Model(props: GroupProps) {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const textures = useTexture([
-    '/img/image1.jpg',
-    '/img/image2.jpg',
-    '/img/image3.jpg'
+    './img/image1.jpg',
+    './img/image2.jpg',
+    './img/image3.jpg'
   ])
   textures.forEach(texture => {
     texture.repeat.set(4, 4)
@@ -47,19 +49,35 @@ export function Model(props: GroupProps) {
     texture.center.set(0.5, 0.5)
     texture.rotation = 0
     texture.flipY = true
+    texture.colorSpace = 'srgb'
     texture.wrapS = RepeatWrapping
     texture.wrapT = RepeatWrapping
+    texture.generateMipmaps = true
+    texture.minFilter = LinearMipmapLinearFilter
+    texture.magFilter = LinearFilter
     texture.needsUpdate = true
+  })
+
+  Object.values(materials).forEach(material => {
+    material.metalness = 0.4
+    material.roughness = 0.6
+    material.envMapIntensity = 1
+    material.side = FrontSide
+    material.needsUpdate = true
   })
 
   const lcdMaterial = new MeshStandardMaterial({
     map: textures[currentImageIndex],
-    emissive: new Color(0x000000),
+    emissive: new Color(0xffffff),
     emissiveMap: textures[currentImageIndex],
-    emissiveIntensity: 1.0,
-    metalness: 0,
+    emissiveIntensity: 0.8,
+    metalness: 0.1,
     roughness: 0.2,
-    color: 0xffffff
+    color: 0xffffff,
+    envMapIntensity: 1,
+    side: FrontSide,
+    transparent: true,
+    opacity: 1
   })
 
   const onAndOff = () => {
