@@ -55,11 +55,6 @@ function App() {
           castShadow 
           receiveShadow 
         />
-      {/*   <Wall 
-          position={[2.15, 1.5, 0]} 
-          rotation={[0, Math.PI / 2, 0]}
-          size={[5, 3, 0.3]}
-        /> */}
         <Model2
           position={[1.57, 0, 0]}
           scale={[0.5, 0.5, 0.5]} 

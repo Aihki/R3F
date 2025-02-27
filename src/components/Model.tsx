@@ -111,17 +111,6 @@ export function Model(props: GroupProps) {
 
   return (
     <group {...props} dispose={null}>
-      <pointLight position={[10, 10, 10]} intensity={1} castShadow />
-      <spotLight 
-        position={[0, 15, 0]}
-        angle={0.3}
-        penumbra={1}
-        intensity={2}
-        castShadow
-        shadow-mapSize={[512, 512]}
-      />
-      <ambientLight intensity={0.5} />
-
       <group rotation={[-Math.PI / 2, 0, 0]} scale={1.016}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <group position={[18.191, 91.872, -931.495]} rotation={[-1.813, 0, 0]}>
